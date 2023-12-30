@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4d307a2ffc4264491894938ea09ba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6500473f0d7654c43a83ef93c5a10369, type: 3}
   m_Name: Pentomino-S
-  m_EditorClassIdentifier:
-  cells:
-  - {x: 0, y: 0}
-  - {x: 1, y: 0}
-  - {x: 2, y: 0}
-  - {x: 2, y: 1}
-  - {x: 3, y: 1}
+  m_EditorClassIdentifier: 
+  cells: []

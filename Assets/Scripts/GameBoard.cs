@@ -161,7 +161,6 @@ public class GameBoard : MonoBehaviour
                 }
             }
         }
-
         return result;
     }
 
