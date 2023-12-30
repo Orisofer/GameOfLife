@@ -1,43 +1,29 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game Of Life/Pattern", fileName = "GOLPattern")]
+[CreateAssetMenu(menuName = "Game of Life/Pattern")]
 public class Pattern : ScriptableObject
 {
-    public Vector2Int[] m_Cells;
+    public Vector2Int[] cells;
 
     public Vector2Int GetCenter()
     {
-        if (m_Cells == null || m_Cells.Length == 0) return Vector2Int.zero;
+        if (cells == null || cells.Length == 0) {
+            return Vector2Int.zero;
+        }
 
         Vector2Int min = Vector2Int.zero;
         Vector2Int max = Vector2Int.zero;
 
-        for (int i = 0; i < m_Cells.Length; i++)
+        for (int i = 0; i < cells.Length; i++)
         {
-            if (m_Cells[i].x < min.x)
-            {
-                min.x = m_Cells[i].x;
-            }
-
-            if (m_Cells[i].y < min.y)
-            {
-                min.y = m_Cells[i].y;
-            }
-
-            if (m_Cells[i].x > max.x)
-            {
-                max.x = m_Cells[i].x;
-            }
-
-            if (m_Cells[i].y < max.y)
-            {
-                max.y = m_Cells[i].y;
-            }
+            Vector2Int cell = cells[i];
+            min.x = Mathf.Min(min.x, cell.x);
+            min.y = Mathf.Min(min.y, cell.y);
+            max.x = Mathf.Max(max.x, cell.x);
+            max.y = Mathf.Max(max.y, cell.y);
         }
 
-        int resultCenterX = Mathf.RoundToInt(max.x - min.x / 2);
-        int resultCenterY = Mathf.RoundToInt(max.y - min.y / 2);
-
-        return new Vector2Int(resultCenterX, resultCenterY);
+        return (min + max) / 2;
     }
+
 }

@@ -26,6 +26,9 @@ public class GameBoard : MonoBehaviour
     private Vector3Int CELL_CENTER_LEFT = new Vector3Int(-1, 0);
     private Vector3Int CELL_BOTTOM_LEFT = new Vector3Int(-1, -1);
 
+    public int Population { get; private set; }
+    public int Generation { get; private set; }
+    public float TimeFromStart { get; private set; }
 
     private void Awake()
     {
@@ -33,6 +36,8 @@ public class GameBoard : MonoBehaviour
 
         m_AliveCells = new HashSet<Vector3Int>();
         m_CellsToCheck = new HashSet<Vector3Int>();
+
+        Generation = 0;
     }
 
     private void Start()
@@ -46,12 +51,14 @@ public class GameBoard : MonoBehaviour
 
         Vector2Int center = pattern.GetCenter();
 
-        for (int i = 0; i < m_Pattern.m_Cells.Length; i++)
+        for (int i = 0; i < m_Pattern.cells.Length; i++)
         {
-            Vector3Int cell = (Vector3Int)(pattern.m_Cells[i] - center);
+            Vector3Int cell = (Vector3Int)(pattern.cells[i] - center);
             m_CurrentState.SetTile(cell, m_AliveTile);
             m_AliveCells.Add(cell);
         }
+
+        Population = m_AliveCells.Count;
     }
 
     private void OnEnable()
@@ -63,13 +70,25 @@ public class GameBoard : MonoBehaviour
     {
         m_CurrentState.ClearAllTiles();
         m_NextState.ClearAllTiles();
+        m_AliveCells.Clear();
+        m_CellsToCheck.Clear();
+        TimeFromStart = 0;
+        Generation = 0;
+        Population = 0;
     }
 
     private IEnumerator SimulateCo()
     {
-        while(enabled)
+        yield return m_YieldTime;
+
+        while (enabled)
         {
             UpdateState();
+
+            Population = m_AliveCells.Count;
+            Generation++;
+            TimeFromStart += m_UpdateInterval;
+
             yield return m_YieldTime;
         }
     }
