@@ -361,7 +361,7 @@ MonoBehaviour:
   m_NextState: {fileID: 963863795}
   m_AliveTile: {fileID: 11400000, guid: 2ff3c0197fa234cc9bcc16bbd0f8acdb, type: 2}
   m_DeadTile: {fileID: 0}
-  m_Pattern: {fileID: 11400000, guid: 9ea53dff4c42a4828a38a3bfc3585416, type: 2}
+  m_Pattern: {fileID: 11400000, guid: f76e8c13d878aa247aa57e66570eb3bf, type: 2}
   m_UpdateInterval: 0.05
 --- !u!156049354 &901208757
 Grid:
